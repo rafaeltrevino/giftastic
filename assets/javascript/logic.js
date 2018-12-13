@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-var adjectives = ["time", "dance", "year", "way", "day", "thing", "world", "life", "hand", "child"];
+var adjectives = ["simpsons", "dance", "year", "grumpy cat", "day", "mexico", "world", "life", "hand", "school", "volcano", "ballet"];
 var state = $(this).attr("data-state");
 var rowID = -1;
 var images = [];
@@ -18,9 +18,10 @@ function displayCatGifs(catAdj) {
 
         for (i=0; i < response.data.length; i++) {
             var catGif = $("<div>").addClass("col-md-3");
-            var rating = $("<p>").html(response.data[i].rating);
+            var bigCard = $("<div>").addClass("card");
+
+            var img = $("<img>").addClass("card-img-top").attr("data-state", "still");
             var altText = $(response.data[i].title);
-            var img = $("<img>");
             var imgSrc = response.data[i].images.fixed_height_still.url;
             var imgStill = response.data[i].images.fixed_height_still.url;
             var imgAnimate = response.data[i].images.fixed_height.url;
@@ -28,9 +29,13 @@ function displayCatGifs(catAdj) {
             img.attr("data-id", response.data[i].id);
             img.attr("data-still", imgStill);
             img.attr("data-animate", imgAnimate);
-            img.attr("data-state", "still");
-            img.addClass("gif");
-            catGif.append(rating, img);
+
+            var cardBody = $("<div>").addClass("card-body");
+            var rating = $("<p>").addClass("card-text").html("Rating: " + response.data[i].rating);
+            cardBody.append(rating);
+            
+            bigCard.append(cardBody, img);
+            catGif.append(bigCard);
             images.push(catGif);
         };
 
@@ -54,7 +59,7 @@ function displayCatGifs(catAdj) {
 function renderButtons() {
     $("#buttonsDiv").empty();
     for (var i=0; i < adjectives.length; i++) {
-        var a = $("<button>");
+        var a = $("<button>").addClass("btn btn-secondary btn-dark btn-sm btn-space").attr("type", "button");
         a.addClass("adjective");
         a.attr("data-name", adjectives[i]);
         a.text(adjectives[i]);
@@ -69,6 +74,7 @@ $("#select-catadj").on("click", function(event) {
     adjectives.push(catAdj);
     renderButtons();
     displayCatGifs(catAdj);
+    $("#gif-input").val("");
 })
 
 // Button click and show GIFs
@@ -78,7 +84,7 @@ $(this).on("click", ".adjective", function() {
 });
 
 // Animate and pause on click
-$(this).on("click", ".gif", function() {
+$(this).on("click", ".card-img-top", function() {
     var state = $(this).attr("data-state");
     var animatedURL = $(this).attr("data-animate");
     var stillURL = $(this).attr("data-still");

@@ -1,3 +1,22 @@
-.gif {
-    float: left;
+h1 {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 56px;
+}
+
+.btn-space {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.col-md-4 {
+    margin: 10px 5px;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 5px 10px #888888;
+}
+
+.card-body {
+    background-color: darkgray;
 }

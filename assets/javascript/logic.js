@@ -6,10 +6,13 @@ var rowID = -1;
 var images = [];
 var catAdj;
 
+// var stillGifUrl = (temp.images["fixed_height_still"].url).replace(/^http:\/\//i, 'https://');;
+//            var movingGifUrl = (temp.images["fixed_height"].url).replace(/^http:\/\//i, 'https://');
+
 function displayCatGifs(catAdj) {
 
     var APIkey = "b98xRER1URXt0Nhz68BEVXWnfI43okvO";
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + catAdj + "+black+white" + "&api_key=" + APIkey + "&limit=10"
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + catAdj + "+black+white" + "&api_key=" + APIkey + "&limit=10"
 
     $.ajax({
         url: queryURL,
